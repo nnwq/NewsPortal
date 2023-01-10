@@ -28,7 +28,7 @@ class Category(models.Model):
 
 class Post(models.Model):
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
-    choice_field = models.ChoiceField(choices=blog_news_choice, default='blog')
+    post_type = models.CharField(max_length=255, choices=blog_news_choice, default='blog')
     time_created = models.DateTimeField(auto_now_add=True, )
     category = models.ManyToManyField(Category, through='PostCategory')
     object_title = models.CharField(max_length=60, default='no title')  # max title length is 60
