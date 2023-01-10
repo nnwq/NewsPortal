@@ -11,7 +11,7 @@ blog_news_choice = (
 
 class Author(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    user_rating = 0
+    user_rating = models.FloatField(default=0)
 
     def update_rating(self):
         return
