@@ -13,11 +13,11 @@ class Author(models.Model):
     rating = models.IntegerField(default=0)
 
     def update_rating(self):
-        for post in Post.objects.filter(author=self.user):
+        for post in Post.objects.filter(author=self):
             self.rating += post.rating*3
-        for comment in Comment.objects.filter(author=Comment.post):
-            self.rating += comment.rating
-        for comment in Comment.objects.filter(author=Comment.user):
+            for comment in Comment.objects.filter(post=post):
+                self.rating += comment.rating
+        for comment in Comment.objects.filter(user=self.user):
             self.rating += comment.rating
         self.save()
 
