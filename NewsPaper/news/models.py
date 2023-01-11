@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from datetime import datetime
+
 
 blog_news_choice = (
         ('blog', 'Blog'),
@@ -31,7 +31,7 @@ class Post(models.Model):
     post_type = models.CharField(max_length=255, choices=blog_news_choice, default='blog')
     time_created = models.DateTimeField(auto_now_add=True, )
     category = models.ManyToManyField(Category, through='PostCategory')
-    object_title = models.CharField(max_length=60, default='no title')  # max title length is 60
+    object_title = models.CharField(max_length=60, default='no title')
     object_content = models.TextField(default='no text')
     rating = models.IntegerField(default=0)
 
