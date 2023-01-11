@@ -51,4 +51,4 @@ Author.objects.all().order_by('-rating').values('user__username', 'rating')[0]
 Post.objects.all().order_by('-rating').values('time_created', 'author', 'author_id', 'id', 'rating', 'object_title')
 Post.preview(Post.objects.all())
 
-Post.objects.filter(id)
+Comment.objects.filter(id=1).values('comment_text', 'id', 'time_created', 'user')
