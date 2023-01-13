@@ -25,6 +25,9 @@ class Author(models.Model):
 class Category(models.Model):
     category_name = models.CharField(max_length=255, unique=True)
 
+    def __str__(self):
+        return self.name.title()
+
 
 class Post(models.Model):
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
@@ -46,6 +49,9 @@ class Post(models.Model):
     def preview(self,):
         self.object_content = self.object_content[0:125]+'...'
         self.save()
+
+    def __str__(self):
+        return f'{self.name.title()}: {self.description[:20]}'
 
 
 class PostCategory(models.Model):
