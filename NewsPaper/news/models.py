@@ -50,9 +50,6 @@ class Post(models.Model):
         self.object_content = self.object_content[0:125]+'...'
         self.save()
 
-    def __str__(self):
-        return f'{self.name.title()}: {self.description[:20]}'
-
 
 class PostCategory(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
@@ -73,3 +70,4 @@ class Comment(models.Model):
     def dislike(self,):
         self.rating -= 1
         self.save()
+

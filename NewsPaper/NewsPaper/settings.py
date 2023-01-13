@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-v!)@_sg6!u)e_ctqc^3dy@kl2dj6--8nc@zv#@xr92e+#2*s$e'
+SECRET_KEY = 'django-insecure-a6hu5z=rligk+f2sdlqw497fmnd)#469omkyw3pb-pfybn=vns'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.flatpages',
+    'django.contrib.sites',
     'news',
     'fpages'
 ]
@@ -126,8 +128,8 @@ STATIC_URL = 'static/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
 STATICFILES_DIRS = [
     BASE_DIR / "static"
 ]
-
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
