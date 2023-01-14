@@ -52,3 +52,9 @@ Post.objects.all().order_by('-rating').values('time_created', 'author', 'author_
 Post.preview(Post.objects.all())
 
 Comment.objects.filter(id=1).values('comment_text', 'id', 'time_created', 'user')
+
+Post.objects.create(author_id=1,
+                    post_type='News',
+                    object_title='Intel Arc A770 16GB GPU drops to €355',
+                    object_content='We have definitely not seen too many deals on Intel Arc A7 GPUs. These cards launched two months ago and have stayed at a relatively high price ever since. Intel launched two Arc A770 models, the 16GB variant launched at $349 in US and €419 in EU.'
+                    )

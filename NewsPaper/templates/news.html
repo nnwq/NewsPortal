@@ -5,5 +5,34 @@ news
 {% endblock title %}
 
 {% block content %}
-<h1>{{ news }}</h1>
+   <h1>All News</h1>
+
+<hr>
+{% if news %}
+<h3>{{ time_now|date:'M d Y' }}</h3>
+<h3> {{ news|length }} </h3>
+
+<table>
+    <tr>
+               <td></td>
+               <td></td>
+               <td></td>
+               <td></td>
+               <td></td>
+           </tr>
+
+           {% for news in news %}
+           <tr>
+               <td>{{ Post.object_title }}</td>
+               <td>{{ Post.time_created }}</td>
+               <td>{{ Post.object_content|truncatewords:20 }}</td>
+               <td>{{ Post.post_type }}</td>
+               <td>{{ Post. }}</td>
+           </tr>
+           {% endfor %}
+
+       </table>
+   {% else %}
+       <h2>No News!</h2>
+   {% endif %}
 {% endblock content %}
