@@ -1,38 +1,36 @@
-<{% extends 'flatpages/default.html' %}
-
+{% extends 'flatpages/default.html' %}
+{% load custom_tags %}
+{% load profanity %}
 {% block title %}
-news
+Post
 {% endblock title %}
 
 {% block content %}
    <h1>All News</h1>
+   <h3>{% current_time '%b %d %Y' %}</h3>
+   <h3> {{ News|length }} </h3>
 
-<hr>
-{% if news %}
-<h3>{{ time_now|date:'M d Y' }}</h3>
-<h3> {{ news|length }} </h3>
-
-<table>
-    <tr>
-               <td></td>
-               <td></td>
-               <td></td>
-               <td></td>
-               <td></td>
+    <hr>
+    {% if News %}
+        <table>
+            <tr>
+               <td>Title</td>
+               <td>Time Created</td>
+               <td>Content</td>
+               <td>Post type</td>
            </tr>
 
-           {% for news in news %}
+           {% for Post in News %}
            <tr>
                <td>{{ Post.object_title }}</td>
                <td>{{ Post.time_created }}</td>
                <td>{{ Post.object_content|truncatewords:20 }}</td>
                <td>{{ Post.post_type }}</td>
-               <td>{{ Post. }}</td>
            </tr>
            {% endfor %}
 
        </table>
-   {% else %}
+    {% else %}
        <h2>No News!</h2>
-   {% endif %}
+    {% endif %}
 {% endblock content %}
