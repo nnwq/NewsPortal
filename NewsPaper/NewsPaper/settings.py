@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'news',
     'fpages',
-    'profanity'
+    'profanity',
+    'django_filters'
 ]
 
 SITE_ID = 1
