@@ -13,7 +13,7 @@ Post
    </form>
 
     <hr>
-    {% if News %}
+    {% if news %}
         <table>
             <tr>
                <td>Title</td>
@@ -22,12 +22,13 @@ Post
                <td>Post type</td>
            </tr>
 
-           {% for Post in News %}
+           {% for post in news %}
            <tr>
-               <td>{{ Post.object_title }}</td>
-               <td>{{ Post.time_created }}</td>
-               <td>{{ Post.object_content|truncatewords:20 }}</td>
-               <td>{{ Post.post_type }}</td>
+               <td>{{ post.object_title }}</td>
+               <td>{{ post.time_created }}</td>
+               <td>{{ post.object_content|truncatewords:20 }}</td>
+               <td>{{ post.post_type }}</td>
+               <td>{{ post.post_category }}</td>
            </tr>
            {% endfor %}
 
