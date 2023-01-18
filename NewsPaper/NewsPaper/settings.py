@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-a6hu5z=rligk+f2sdlqw497fmnd)#469omkyw3pb-pfybn=vns
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["127.0.0.1"]
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -42,13 +42,7 @@ INSTALLED_APPS = [
     'news',
     'fpages',
     'profanity',
-    'django_filters',
-    'sign',
-    'protec',
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    'allauth.socialaccount.providers.google'
+    'django_filters'
 ]
 
 SITE_ID = 1
@@ -115,10 +109,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',
-    'allauth.account.auth_backends.AuthenticationBackend',
-]
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
@@ -145,6 +135,3 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATICFILES_DIRS = [
     BASE_DIR / "static"
 ]
-
-LOGIN_URL = '/accounts/login/'
-LOGIN_REDIRECT_URL = '/'
