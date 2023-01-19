@@ -1,0 +1,8 @@
+{% extends "flatpages/default.html" %}
+
+{% block content %}
+<h2> User page {{request.user.username}}</h2>
+<div> add personal info </div>
+
+<button> <a href="sign/logout/">Logout</a> </button>
+{% endblock %}
