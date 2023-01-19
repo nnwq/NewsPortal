@@ -5,4 +5,7 @@
 <div> add personal info </div>
 
 <button> <a href="sign/logout/">Logout</a> </button>
+{% if is_not_author %}
+<button> <a href="sign/upgrade/"> Become an author! </a> </button>
+{% endif %}
 {% endblock %}
