@@ -19,6 +19,7 @@ class Author(models.Model):
 
 class Category(models.Model):
     category_name = models.CharField(max_length=255, unique=True)
+    subscribers = models.ManyToManyField(User)
 
     def __str__(self):
         return self.category_name.title()
@@ -45,7 +46,7 @@ class Post(models.Model):
         self.save()
 
     def preview(self,):
-        self.object_content = self.object_content[0:125]+'...'
+        self.object_content = self.object_content[0:50]+'...'
         self.save()
 
     def __str__(self):
