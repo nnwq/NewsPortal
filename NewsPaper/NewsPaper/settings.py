@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.flatpages',
-    'django.contrib.sites',
     'news',
     'fpages',
     'profanity',
@@ -51,8 +50,11 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
     'news.apps.NewsConfig',
     'django.contrib.sites',
+    'django-apschedule'
 ]
+APSCHEDULER_DATETIME_FORMAT = "N j, Y, f:s a"
 
+APSCHEDULER_RUN_NOW_TIMEOUT = 25
 SITE_ID = 1
 
 MIDDLEWARE = [

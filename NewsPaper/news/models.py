@@ -19,7 +19,7 @@ class Author(models.Model):
 
 class Category(models.Model):
     category_name = models.CharField(max_length=255, unique=True)
-    subscribers = models.ManyToManyField(User)
+    subscribers = models.ManyToManyField(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.category_name.title()
@@ -76,3 +76,7 @@ class Comment(models.Model):
         self.rating -= 1
         self.save()
 
+
+class SubscribedUsers(models.Model):
+    subscriber = models.ManyToManyField(User, on_delete=models.CASCADE)
+    Category = Category.object.get(id=id)
