@@ -1,7 +1,7 @@
 from django.views.generic import (
     ListView, DetailView, CreateView, UpdateView, DeleteView
 )
-from .models import Post, User, Category, SubscribedUsers
+from .models import Post, User, Category
 from .filters import NewsFilter
 from django.urls import reverse_lazy
 from .forms import PostForm
@@ -15,8 +15,8 @@ import json
 
 def subscribe(request, id):
     user = request.user
-    category = Category.object.get(id=id)
-    SubscribedUsers.subscriber.add(user, category)
+    category = Category.objects.get(id=id)
+    Category.subscribers.add(user, category)
 
 
 # Create your views here.
@@ -52,7 +52,6 @@ class PostCreate(CreateView):
     html_content = render_to_string(
         'post_edit.html',
     )
-
 
 
 class PostUpdate(UpdateView):
