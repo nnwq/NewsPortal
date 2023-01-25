@@ -1,7 +1,9 @@
 from django.dispatch import receiver
 from django.core.mail import mail_managers
-from .models import Post, Category, PostCategory, Author, SubscribedUsers, send_email_to_subscribers
+from .models import Post, Category, PostCategory, Author, SubscribedUsers
 from django.db.models.signals import post_save, m2m_changed
+from tasks import send_email_to_subscribers
+from django.db.models import F
 
 
 @receiver(m2m_changed, sender=PostCategory)
@@ -17,4 +19,5 @@ def notify_post_subscribers(sender, instance, action, reverse, model, pk_set, **
             id_to_send = SubscribedUsers.objects.filter(category_id=cat_['category_id']).values('user_id')
             category = Category.objects.filter(id=cat_['category_id']).values('name')[0]['name']
 
-            send_email_to_subscribers(user_, category, title, text, id_to_send, url)
+            for _ in id_to_send:
+                send_email_to_subscribers.apply_async([user_, category, title, text, _['user_id'], url], countdown=10)

@@ -51,7 +51,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
     'news.apps.NewsConfig',
     'django.contrib.sites',
-    'django-apschedule'
+    'django-apschedule',
 ]
 APSCHEDULER_DATETIME_FORMAT = "N j, Y, f:s a"
 
