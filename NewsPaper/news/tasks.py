@@ -48,12 +48,9 @@ def send_email_every_week():
         user_name = f"{user[0]['first_name']} {user[0]['last_name']} ({user[0]['username']})"
         for c in range(categories.count()):
             category_name = categories[c]['category_id__name']
-#            print(user)
-#            print(category_name)
             posts = post_source.filter(category__id=categories[c]['category_id'])
             if posts.count() == 0:
                 continue
-#            print(posts)
             html_content = render_to_string(
                         'post_digest.html',
                         {
@@ -66,7 +63,6 @@ def send_email_every_week():
                             'url_start': 'http://127.0.0.1:8000/',
                         }
                     )
-#            print(html_content)
             msg = EmailMultiAlternatives(
                 subject=title,
                 body=f'New posts from {date_from} по {date_to}.',
