@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+{% load custom_filters %}
+{% load custom_tags %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }} from {{ date_from|date:'d.M.Y' }} to {{ date_to|date:'d.M.Y' }}.</title>
+</head>
+<body>
+    <h2>Hello {{ user }}!</h2>
+    <p>News digest from {{ date_from|date:'d.M.Y' }} to {{ date_to|date:'d.M.Y' }} in your favourite category."{{ category }}"!</p>
+           {% for one in posts %}
+               <td>
+                  {% if one.post_type == 'N' %}
+                   <a href={{ url_start }}news/{{ one.id }}> {{ one.id }} {{ one.title }} {{ one.creation|date:'d.M.Y' }} {{ one.text|truncatechars:20|censor }}</a>
+                   {% else %}
+                   <a href={{ url_start }}articles/{{ one.id }}>{{ one.id }} {{ one.title }} {{ one.creation|date:'d.M.Y' }} {{ one.text|truncatechars:20|censor }}</a>
+                   {% endif %}
+                <br>
+               </td>
+           {% endfor %}
+</body>
+</html>

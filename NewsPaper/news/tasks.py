@@ -35,12 +35,12 @@ def send_email_to_subscribers(user, category, title, text, receivers_id, url):
 
 @shared_task()
 def send_email_every_week():
-    print('')
+    print('Weekly digest')
     date_from = date.today()-timedelta(days=8)
     date_to = date.today()-timedelta(days=1)
     post_source = Post.objects.filter(Q(creation__gte=date_from) & Q(creation__lt=date_to))
     users = SubscribedUsers.objects.all().values('user_id').distinct()
-    title = f''
+    title = f'Weekly Digest'
 
     for i in range(users.count()):
         categories = SubscribedUsers.objects.filter(user_id=users[i]['user_id']).values('category_id', 'category_id__name')
@@ -52,7 +52,7 @@ def send_email_every_week():
             if posts.count() == 0:
                 continue
             html_content = render_to_string(
-                        'post_digest.html',
+                        'news_digest.html',
                         {
                             'date_from': date_from,
                             'date_to': date_to,
