@@ -5,7 +5,7 @@ from django.conf import settings
 from apscheduler.schedulers.blocking import BlockingScheduler
 from apscheduler.triggers.cron import CronTrigger
 from django.core.management.base import BaseCommand
-from django_apscheduler.jobstores import DjangoJobStore
+from apscheduler.jobstores.base import BaseJobStore
 from django_apscheduler.models import DjangoJobExecution
 from django.db.models import Q
 from datetime import date, timedelta
@@ -72,7 +72,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         scheduler = BlockingScheduler(timezone=settings.TIME_ZONE)
-        scheduler.add_jobstore(DjangoJobStore(), "default")
+        scheduler.add_jobstore(BaseJobStore(), "default")
 
         scheduler.add_job(
             inform_for_new_posts,

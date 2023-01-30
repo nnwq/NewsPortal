@@ -3,7 +3,7 @@ from django.template.loader import render_to_string
 from django.core.mail import EmailMultiAlternatives
 from django.contrib.auth.models import User
 from datetime import date, timedelta
-from models import Post, SubscribedUsers
+from news.models import Post, SubscribedUsers
 from django.db.models import Q
 
 

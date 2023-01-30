@@ -2,8 +2,8 @@ from django.dispatch import receiver
 from django.core.mail import mail_managers
 from .models import Post, Category, PostCategory, Author, SubscribedUsers
 from django.db.models.signals import post_save, m2m_changed
-from tasks import send_email_to_subscribers
 from django.db.models import F
+from news.tasks import send_email_to_subscribers
 
 
 @receiver(m2m_changed, sender=PostCategory)

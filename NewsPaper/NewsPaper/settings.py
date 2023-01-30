@@ -49,9 +49,6 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
-    'news.apps.NewsConfig',
-    'django.contrib.sites',
-    'django-apschedule',
 ]
 APSCHEDULER_DATETIME_FORMAT = "N j, Y, f:s a"
 
@@ -183,4 +180,4 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'dmitrypomishin@gmail.com'
-EMAIL_HOST_PASSWORD = 'bsjlvbrvhvnbwous'
+EMAIL_HOST_PASSWORD = ''

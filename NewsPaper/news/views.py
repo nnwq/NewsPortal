@@ -1,7 +1,7 @@
 from django.views.generic import (
     ListView, DetailView, CreateView, UpdateView, DeleteView
 )
-from .models import Post, User, Category
+from .models import Post, User, Category, SubscribedUsers
 from .filters import NewsFilter
 from django.urls import reverse_lazy
 from .forms import PostForm
@@ -10,6 +10,7 @@ from django.template.loader import render_to_string
 from django.shortcuts import redirect
 from django.dispatch import receiver
 from django.http import JsonResponse
+import django.db.models
 import json
 
 
@@ -19,10 +20,53 @@ def subscribe(request, id):
     Category.subscribers.add(user, category)
 
 
+class NewsListFiltered(ListView):
+    # Указываем модель, объекты которой мы будем выводить
+    model = Post
+    # Поле, которое будет использоваться для сортировки объектов
+    ordering = '-creation'
+    # Указываем имя шаблона, в котором будут все инструкции о том,
+    # как именно пользователю должны быть показаны наши объекты
+    template_name = 'news_search.html'
+    # Это имя списка, в котором будут лежать все объекты.
+    # Его надо указать, чтобы обратиться к списку объектов в html-шаблоне.
+    context_object_name = 'news_flist'
+    paginate_by = 10
+
+    @staticmethod
+    def is_subscribed(cat, query: django.db.models.query.QuerySet):
+        for i in range(len(query)):
+            if cat == str(query[i]['category_id']):
+                return True
+        return False
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['news_count'] = self.filterset.qs.count()
+        # Добавляем в контекст объект фильтрации.
+        context['filterset'] = self.filterset
+        context['sub_button'] = False
+        if self.request.user.is_authenticated:
+            context['user_name'] = self.request.user
+            if 'category' in self.filterset.data.keys():
+                context['subscribed'] = self.is_subscribed(self.filterset.data['category'],
+                                                           SubscribedUsers.objects.filter(user_id=self.request.user).values('category_id'))
+                if self.filterset.data['category'] != '':
+                    context['sub_button'] = True
+
+        return context
+
+   # Переопределяем функцию получения списка новостей
+    def get_queryset(self):
+        queryset = Post.objects.order_by('-creation')
+        self.filterset = NewsFilter(self.request.GET, queryset)
+        return self.filterset.qs
+
+
 # Create your views here.
 class PostList(ListView):
     model = Post
-    ordering = 'time_created'
+    ordering = 'creation'
     template_name = 'news.html'
     context_object_name = 'news'
     paginate_by = 10
