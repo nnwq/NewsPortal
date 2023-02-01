@@ -19,10 +19,10 @@ class Author(models.Model):
 
 class Category(models.Model):
     category_name = models.CharField(max_length=255, unique=True)
-    subscribers = models.ManyToManyField(User)
+    subscribers_category = models.ManyToManyField(User, through='SubscribedUsers')
 
     def __str__(self):
-        return self.category_name.title()
+        return f'{self.category_name}'
 
 
 class Post(models.Model):
@@ -81,8 +81,5 @@ class Comment(models.Model):
 
 
 class SubscribedUsers(models.Model):
-    subscriber = models.ManyToManyField(User)
+    subscriber = models.ForeignKey(User, on_delete=models.CASCADE)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return f'{self.id}: {self.user} - {self.category}'
